@@ -17,7 +17,7 @@
   <header class="topbar">
     <a class="brand" href="#home" aria-label="little japan home"><span class="brand-mark">日</span><span>little <b>japan</b></span></a>
     <nav class="desktop-nav" aria-label="Main navigation">
-      <a href="#itinerary">Itinerary</a><a href="#map-section">Map</a><a href="#discover">Discover</a><a href="#toolkit">Trip kit</a>
+      <a href="#itinerary">Itinerary</a><a href="#map-section">Map</a><a href="#discover">Discover</a><a href="#toolkit">Trip kit</a><a href="#field-hq">Field HQ</a><a href="#memories">Memories</a>
     </nav>
     <div class="top-actions"><span class="trip-date">04 — 14 DEC ’26</span><button class="icon-button" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">☼</button><button class="menu-button" id="menuButton" aria-label="Open menu">☰</button></div>
   </header>
@@ -79,11 +79,84 @@
 
     <section class="section local-hacks"><div class="section-heading"><div><div class="eyebrow">THE SMALL THINGS THAT MAKE A BIG DIFFERENCE</div><h2>Local-ish <em>know-how.</em></h2></div></div><div class="hack-grid" id="hackGrid"></div></section>
 
+
+    <section class="section field-hq" id="field-hq">
+      <div class="section-heading"><div><div class="eyebrow">YOUR TRIP CONTROL ROOM</div><h2>Plan it. <em>Then just be there.</em></h2><p>Live conditions where available, booking status you control, route shortcuts and calm backup plans.</p></div></div>
+      <div class="hq-grid">
+        <article class="tool-card today-card">
+          <div class="tool-head"><span class="tool-icon">☀</span><div><h3>Day-of dashboard</h3><p>Pick a trip day to see its anchors and a sensible pace.</p></div></div>
+          <label class="field-label" for="daySelect">Your trip day</label><select id="daySelect" class="wide-select"></select>
+          <div id="todaySummary" class="today-summary"></div>
+          <div class="today-actions"><a id="todayMapLink" class="button button-dark" href="#map-section">Open today's map ↗</a><button id="markDayDone" class="small-button">Mark day as enjoyed ✓</button></div>
+        </article>
+        <article class="tool-card weather-card">
+          <div class="tool-head"><span class="tool-icon">🌤</span><div><h3>Weather check</h3><p>Live forecast when the date is inside the provider's forecast window.</p></div></div>
+          <div class="weather-controls"><select id="weatherCity" class="wide-select"><option value="tokyo">Tokyo</option><option value="fuji">Kawaguchiko / Fuji</option><option value="kyoto">Kyoto</option><option value="osaka">Osaka</option></select><button id="refreshWeather" class="small-button">Refresh ↻</button></div>
+          <div id="weatherResult" class="weather-result"><p class="muted">Tap refresh to check the latest available forecast.</p></div>
+          <p class="fine-print">Weather uses Open-Meteo without an API key. Forecasts are not reliable this far ahead; check again 1–3 days before each outing. Fuji cloud cover is only a visibility clue, not a Mt Fuji camera feed.</p>
+        </article>
+        <article class="tool-card booking-card">
+          <div class="tool-head"><span class="tool-icon">🎟</span><div><h3>Bookings & confirmations</h3><p>Track what is booked, what needs checking, and jump to official providers.</p></div></div>
+          <div class="booking-legend"><span>Change each status as you confirm it. No booking is made inside this app.</span></div>
+          <div id="bookingBoard" class="booking-board"></div>
+        </article>
+        <article class="tool-card route-card">
+          <div class="tool-head"><span class="tool-icon">🚉</span><div><h3>Transport launchpad</h3><p>Quick links for live routing and operator timetables.</p></div></div>
+          <div class="route-links">
+            <a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=Haneda+Airport&destination=Shinjuku+Station&travelmode=transit">Haneda → Shinjuku live route ↗</a>
+            <a target="_blank" rel="noopener" href="https://e.fujikyu-railway.jp/fujikaiyuu/">FUJI EXCURSION reservations ↗</a>
+            <a target="_blank" rel="noopener" href="https://www.fujikyucitybus.com/highwaybus/kawaguchiko.html">Kawaguchiko → Mishima bus ↗</a>
+            <a target="_blank" rel="noopener" href="https://smart-ex.jp/en/">SmartEX Shinkansen ↗</a>
+            <a target="_blank" rel="noopener" href="https://www.nankai.co.jp/en_railway/access-timetable">Nankai → KIX timetable ↗</a>
+            <a target="_blank" rel="noopener" href="https://www.navitime.co.jp/en/">NAVITIME route search ↗</a>
+          </div>
+          <p class="fine-print">There is no universal public endpoint for every Japanese train operator. These links open current routing/timetable services; they do not stream platform or delay data inside this app. Always confirm at the station.</p>
+        </article>
+        <article class="tool-card rescue-card">
+          <div class="tool-head"><span class="tool-icon">🧭</span><div><h3>Plan B generator</h3><p>For rain, tired feet, hidden Fuji or a day that starts late.</p></div></div>
+          <div class="mood-tabs rescue-moods"><button class="active" data-rescue="low">Low energy</button><button data-rescue="rain">Rainy day</button><button data-rescue="fuji">Fuji hidden</button><button data-rescue="slow">Slow local day</button></div>
+          <div id="rescueResult" class="rescue-result"></div>
+        </article>
+        <article class="tool-card doc-card">
+          <div class="tool-head"><span class="tool-icon">🗂</span><div><h3>Reservation & document index</h3><p>Store links and reference labels. Avoid sensitive numbers and payment details.</p></div></div>
+          <form id="docForm" class="stack-form"><input id="docName" placeholder="e.g. Kyoto hotel confirmation" required maxlength="70"><input id="docUrl" type="url" placeholder="Confirmation email / booking URL (optional)"><input id="docRef" placeholder="Reference label (optional — no passport/card data)" maxlength="40"><button class="button button-dark" type="submit">Add to index +</button></form>
+          <div id="docList" class="doc-list"></div>
+          <p class="fine-print">This is a local index, not encrypted document storage. Keep actual passport, card, visa and booking credentials in a secure password manager or provider app.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section memories-section" id="memories">
+      <div class="section-heading"><div><div class="eyebrow">THE REASON YOU'RE GOING</div><h2>Make room for <em>the memories.</em></h2><p>A little travel journal for tiny discoveries, meals worth remembering, funny moments and photos. Entries stay on this browser unless you export a backup.</p></div></div>
+      <div class="memory-layout">
+        <form id="memoryForm" class="tool-card memory-form">
+          <div class="tool-head"><span class="tool-icon">📔</span><div><h3>Add a memory</h3><p>Don't wait for the perfect caption. Save the moment while it's fresh.</p></div></div>
+          <input id="memoryTitle" placeholder="A tiny title — e.g. First Fuji glimpse" required maxlength="70">
+          <div class="memory-row"><input id="memoryDate" type="date" value="2026-12-04"><select id="memoryCity"><option>Tokyo</option><option>Kawaguchiko</option><option>Kyoto</option><option>Osaka</option><option>Nara</option><option>On the way</option></select></div>
+          <textarea id="memoryText" rows="4" placeholder="What happened? What did it smell / taste / feel like? Who made you laugh?"></textarea>
+          <input id="memoryPhoto" type="file" accept="image/*" multiple>
+          <small class="fine-print">Photos are resized before local saving. Keep it to a few favourites per entry so your browser storage doesn't fill up.</small>
+          <button class="button button-dark" type="submit">Save this moment ♥</button>
+        </form>
+        <div class="memory-feed-wrap"><div class="memory-feed-head"><b>Your little Japan scrapbook</b><span id="memoryCount">0 moments</span></div><div id="memoryFeed" class="memory-feed"><p class="muted">Your first memory is waiting to happen.</p></div></div>
+      </div>
+    </section>
+
+    <section class="section practical-section" id="practical">
+      <div class="section-heading"><div><div class="eyebrow">FUTURE YOU WILL THANK YOU</div><h2>Small practical <em>superpowers.</em></h2><p>Offline basics, packing by category, emergency info and a portable backup of your app data.</p></div></div>
+      <div class="practical-grid">
+        <article class="tool-card"><div class="tool-head"><span class="tool-icon">🧳</span><div><h3>Packing by category</h3><p>Tap to pack. Fuji winter gets its own mini-list.</p></div></div><div id="packingList" class="packing-list"></div></article>
+        <article class="tool-card"><div class="tool-head"><span class="tool-icon">🆘</span><div><h3>Emergency & etiquette card</h3><p>Save this screen offline before leaving.</p></div></div><div class="emergency-lines"><div><b>110</b><span>Police emergency</span></div><div><b>119</b><span>Ambulance / fire</span></div><div><b>Japan Visitor Hotline</b><span>Check current JNTO contact details before travel</span></div></div><div class="travel-tip"><b>Onsen basics</b><p>Wash before entering the bath, keep towels out of the water, tie up long hair, and check tattoo rules / mixed bathing rules before arrival.</p></div><div class="travel-tip"><b>Temple & neighbourhood manners</b><p>Follow signs for photography, keep voices down in residential lanes, don't block shop entrances, and don't feed wildlife outside designated food rules.</p></div><div class="travel-tip"><b>Lost or unwell</b><p>Keep your hotel address in Japanese, travel insurance contact and emergency contact accessible without relying on mobile data.</p></div></article>
+        <article class="tool-card backup-card"><div class="tool-head"><span class="tool-icon">💾</span><div><h3>Your data, yours</h3><p>Export a backup before switching phones or browsers.</p></div></div><button id="exportBackup" class="button button-dark">Download my trip backup ↓</button><label class="button button-light import-label">Restore a backup ↑<input id="importBackup" type="file" accept="application/json" hidden></label><button id="printGuide" class="small-button">Print / save trip guide</button><p class="fine-print">Progress is stored in this browser only. Export/import is the way to move your checklist, budget, saved places and journal between devices. The map itself still needs data.</p></article>
+      </div>
+    </section>
+
     <section class="closing"><div class="closing-mark">またね</div><h2>Leave a little room<br>for <em>the unexpected.</em></h2><p>Some of the best bits won't be on this map. Follow the warm lights, take the side street, stop for the bakery smell.</p><a href="#home" class="text-link">Back to the top ↑</a><div class="closing-footer">MADE FOR YOUR DECEMBER 2026 JAPAN TRIP · 旅を楽しんでね</div></section>
   </main>
   <footer class="footer"><span>little japan © 2026</span><span>Personal trip companion · Not an official travel or booking service</span><a href="README.md">About this app</a></footer>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="app.js"></script>
+  <script src="features.js"></script>
 </body>
 </html>
