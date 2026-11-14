@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#f7f3eb" />
+  <meta name="description" content="A relaxed, personal Japan trip companion for Tokyo, Fuji, Kyoto, Osaka and Nara." />
+  <title>little japan — your trip companion</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="preconnect" href="https://unpkg.com" />
+  <link rel="preconnect" href="https://tile.openstreetmap.org" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain"></div>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="little japan home"><span class="brand-mark">日</span><span>little <b>japan</b></span></a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="#itinerary">Itinerary</a><a href="#map-section">Map</a><a href="#discover">Discover</a><a href="#toolkit">Trip kit</a>
+    </nav>
+    <div class="top-actions"><span class="trip-date">04 — 14 DEC ’26</span><button class="icon-button" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">☼</button><button class="menu-button" id="menuButton" aria-label="Open menu">☰</button></div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="live-dot"></span> YOUR PERSONAL JAPAN FIELD GUIDE</div>
+        <h1>Take the scenic<br><em>way around.</em></h1>
+        <p class="hero-sub">A little less rushing. A little more wandering. Eleven days of good food, warm onsens, tiny streets, big views and room for happy accidents.</p>
+        <div class="hero-buttons"><a class="button button-dark" href="#itinerary">Explore the trip <span>↗</span></a><a class="text-link" href="#map-section">Open the map ↓</a></div>
+        <div class="hero-stats"><div><strong>11</strong><span>days away</span></div><i></i><div><strong>5</strong><span>destinations</span></div><i></i><div><strong>1</strong><span>very good trip</span></div></div>
+      </div>
+      <div class="hero-art" aria-label="Illustration of Mount Fuji at sunrise"><div class="sun"></div><div class="mountain mountain-back"></div><div class="mountain mountain-front"></div><div class="lake"></div><div class="hero-stamp">旅<br><small>tabi / journey</small></div><div class="hero-caption">FUJI FIVE LAKES · DECEMBER</div></div>
+      <div class="vertical-note">TOKYO → FUJI → KYOTO → OSAKA</div>
+    </section>
+
+    <section class="quick-strip" aria-label="Trip essentials">
+      <div class="quick-item"><span class="quick-icon">✈</span><div><small>ARRIVE</small><b>4 Dec · Haneda 15:05</b></div></div>
+      <div class="quick-item"><span class="quick-icon">🗻</span><div><small>FUJI NIGHT</small><b>9 Dec · Kawaguchiko</b></div></div>
+      <div class="quick-item"><span class="quick-icon">🚄</span><div><small>FINAL DEPARTURE</small><b>14 Dec · KIX 09:20</b></div></div>
+      <div class="quick-item"><span class="quick-icon">🌡</span><div><small>PACK FOR</small><b>City winter + freezing Fuji</b></div></div>
+    </section>
+
+    <section class="section" id="itinerary">
+      <div class="section-heading"><div><div class="eyebrow">THE GOOD BITS, IN ORDER</div><h2>Your days, <em>loosely planned.</em></h2><p>Anchors are the things worth organising around. Everything else is permission to explore — or do absolutely nothing for a bit.</p></div><div class="heading-side"><span class="mini-label">TRIP PROGRESS</span><div class="progress-track"><span id="tripProgress"></span></div><b id="progressText">0 / 0 stops done</b></div></div>
+      <div class="city-tabs" id="cityTabs" role="tablist" aria-label="Filter itinerary by city"></div>
+      <div class="day-grid" id="dayGrid"></div>
+    </section>
+
+    <section class="section map-section" id="map-section">
+      <div class="section-heading"><div><div class="eyebrow">ALL YOUR LITTLE PIN-DROPS</div><h2>Wander with <em>a map.</em></h2><p>Saved favourites from your Google Maps list, the route essentials and a few useful extras. Tap a pin to see what it is and open directions.</p></div><div class="map-key"><span><i class="key-dot tokyo"></i>Tokyo</span><span><i class="key-dot fuji"></i>Fuji</span><span><i class="key-dot kyoto"></i>Kyoto</span><span><i class="key-dot osaka"></i>Osaka / Nara</span></div></div>
+      <div class="map-toolbar"><div class="filter-pills" id="mapFilters"></div><label class="search-box"><span>⌕</span><input id="placeSearch" type="search" placeholder="Find a place, café, temple…" autocomplete="off"></label><button class="small-button" id="fitMap">Show all pins ↗</button></div>
+      <div class="map-layout"><div id="map" role="application" aria-label="Map of trip places"></div><aside class="map-sidebar"><div class="sidebar-top"><span class="mini-label">PLACEBOOK</span><span id="placeCount">0 places</span></div><div id="placeList" class="place-list"></div></aside></div>
+      <p class="map-note">Map tiles require an internet connection. Locations are approximate pin centres; use the linked directions for final navigation and verify the exact entrance before setting out.</p>
+    </section>
+
+    <section class="section discover" id="discover">
+      <div class="section-heading"><div><div class="eyebrow">NOT JUST THE BIG CHECKLIST</div><h2>Find your <em>own Japan.</em></h2><p>Little rituals and side quests for the in-between moments. Pick a mood and see what fits nearby.</p></div></div>
+      <div class="mood-tabs" id="moodTabs"><button class="active" data-mood="all">A bit of everything</button><button data-mood="food">Eat something lovely</button><button data-mood="slow">Slow & quiet</button><button data-mood="shop">Browse & shop</button><button data-mood="photo">Pretty views</button><button data-mood="night">After dark</button></div>
+      <div class="discover-grid" id="discoverGrid"></div>
+    </section>
+
+    <section class="onsen-band">
+      <div class="onsen-art"><div class="onsen-moon"></div><div class="onsen-mountain"></div><div class="steam steam-one"></div><div class="steam steam-two"></div><div class="onsen-water"></div><span class="onsen-kanji">湯</span></div>
+      <div class="onsen-copy"><div class="eyebrow">A LITTLE WINTER LUXURY</div><h2>Hot water.<br><em>Cold air. Fuji views.</em></h2><p>Your onsen shortlist, with an important distinction between a genuinely private bath and a private rest room attached to shared bathing facilities.</p><div class="onsen-highlights"><div><b>¥8,800</b><small>Solaniwa · 90 min private bath room*</small></div><div><b>¥3,500</b><small>Fuji Yurari · 60 min private bath*</small></div></div><a class="button button-light" href="#onsen-list">Compare onsen options <span>↗</span></a><small class="fine-print">*Indicative prices from the research notes; access conditions, taxes, availability and current rates must be confirmed with the facility.</small></div>
+    </section>
+    <section class="section onsen-section" id="onsen-list"><div class="section-heading"><div><div class="eyebrow">ONSEN FIELD NOTES</div><h2>Choose your <em>soak.</em></h2><p>Private means exclusive use of the bathing tub — not just a private changing or resting room. Always confirm mixed-gender rules before booking.</p></div></div><div class="onsen-grid" id="onsenGrid"></div></section>
+
+    <section class="section toolkit" id="toolkit">
+      <div class="section-heading"><div><div class="eyebrow">THE BORING STUFF, MADE CUTE</div><h2>Your little <em>trip kit.</em></h2><p>Keep the logistics in one place. Changes are saved on this device.</p></div></div>
+      <div class="tool-grid">
+        <article class="tool-card budget-card"><div class="tool-head"><span class="tool-icon">¥</span><div><h3>Spending diary</h3><p>Track the little things before they add up.</p></div></div><div class="budget-summary"><div><small>TOTAL LOGGED</small><strong id="totalYen">¥0</strong></div><div><small>ROUGH INR*</small><strong id="totalInr">₹0</strong></div></div><form id="expenseForm" class="expense-form"><input id="expenseName" placeholder="What did you spend on?" required maxlength="60"><input id="expenseAmount" type="number" min="1" step="1" placeholder="¥ amount" required><select id="expenseCategory"><option>Food & coffee</option><option>Transport</option><option>Shopping</option><option>Tickets</option><option>Other</option></select><button class="button button-dark" type="submit">Add spend +</button></form><div class="expense-list" id="expenseList"></div><p class="fine-print">*INR conversion is an editable planning estimate, not a live exchange rate. Default: ¥1 ≈ ₹0.58.</p><label class="rate-row">Your planning rate <span>¥1 = ₹ <input id="fxRate" type="number" min="0.01" step="0.01" value="0.58"></span></label></article>
+        <article class="tool-card checklist-card"><div class="tool-head"><span class="tool-icon">✓</span><div><h3>Before-you-go list</h3><p>Tick it off. Your future self says thanks.</p></div></div><div class="check-progress"><span id="checkProgress"></span></div><div id="checklist" class="checklist"></div></article>
+        <article class="tool-card phrase-card"><div class="tool-head"><span class="tool-icon">あ</span><div><h3>Little Japanese</h3><p>Tap to hear the phrase (browser voice support required).</p></div></div><div id="phrases" class="phrases"></div></article>
+        <article class="tool-card travel-card"><div class="tool-head"><span class="tool-icon">🚆</span><div><h3>Getting around</h3><p>The transport rules that save stress.</p></div></div><div class="travel-tip"><b>IC card</b><p>Use Suica / PASMO / ICOCA for most local trains, metros and convenience-store taps. Keep intercity reservations separate.</p></div><div class="travel-tip"><b>Fuji transfer</b><p>9 Dec: Shinjuku → Kawaguchiko on the reserved FUJI EXCURSION. 10 Dec: bus to Mishima, then Shinkansen to Kyoto. Leave a generous connection buffer.</p></div><div class="travel-tip"><b>Big luggage</b><p>Consider forwarding your large suitcase Tokyo → Kyoto and carry a small overnight bag to Fuji. Confirm the hotel accepts deliveries.</p></div><div class="travel-tip"><b>Airport morning</b><p>14 Dec: early Namba → KIX service is the target. Recheck the live Nankai timetable and have a taxi fallback.</p></div></article>
+      </div>
+    </section>
+
+    <section class="section local-hacks"><div class="section-heading"><div><div class="eyebrow">THE SMALL THINGS THAT MAKE A BIG DIFFERENCE</div><h2>Local-ish <em>know-how.</em></h2></div></div><div class="hack-grid" id="hackGrid"></div></section>
+
+    <section class="closing"><div class="closing-mark">またね</div><h2>Leave a little room<br>for <em>the unexpected.</em></h2><p>Some of the best bits won't be on this map. Follow the warm lights, take the side street, stop for the bakery smell.</p><a href="#home" class="text-link">Back to the top ↑</a><div class="closing-footer">MADE FOR YOUR DECEMBER 2026 JAPAN TRIP · 旅を楽しんでね</div></section>
+  </main>
+  <footer class="footer"><span>little japan © 2026</span><span>Personal trip companion · Not an official travel or booking service</span><a href="README.md">About this app</a></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="app.js"></script>
+</body>
+</html>

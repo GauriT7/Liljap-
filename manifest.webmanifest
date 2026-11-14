@@ -1,0 +1,9 @@
+{
+  "name": "little japan — your trip companion",
+  "short_name": "little japan",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f7f3eb",
+  "theme_color": "#f7f3eb",
+  "description": "A relaxed personal guide to Tokyo, Kawaguchiko, Kyoto, Osaka and Nara."
+}
