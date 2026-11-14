@@ -1,45 +1,52 @@
 # little japan — your trip companion
 
-A responsive, static trip companion for the 4–14 December 2026 Japan itinerary: Tokyo → Kawaguchiko / Mt Fuji → Kyoto → Osaka + Nara → KIX.
+A responsive, installable static travel companion for 4–14 December 2026: Tokyo → Kawaguchiko / Mt Fuji → Kyoto → Osaka + Nara → KIX.
 
-## Run it locally
-
-You can open `index.html` directly for most features. For the map and installable-app behaviour, run a tiny local server from this folder:
+## Run locally
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Then open http://localhost:8000.
+Open http://localhost:8000. Use HTTPS or localhost for service-worker/PWA support.
 
 ## Publish with GitHub Pages
 
-1. Create a GitHub repository (for example `little-japan-trip`).
-2. Upload **all files in this folder** to the repository root: `index.html`, `styles.css`, `app.js`, `manifest.webmanifest`, `sw.js`, and `README.md`.
-3. In the repository, open **Settings → Pages**.
-4. Under Build and deployment, choose **Deploy from a branch**, select `main` and `/ (root)`, then Save.
-5. Wait for the Pages deployment. Your site will be available at `https://YOUR-USERNAME.github.io/REPOSITORY-NAME/`.
-6. Open the site on your phone and use the browser's **Add to Home Screen** option.
+1. Create a new repository, e.g. `little-japan`.
+2. Upload every file in this folder to the repository root.
+3. Open **Settings → Pages → Deploy from a branch → main → /(root)**.
+4. Save and open `https://YOUR-USERNAME.github.io/little-japan/`.
+5. On iPhone, open the deployed site in Safari and choose **Share → Add to Home Screen**.
 
 ## Features
 
-- Day-by-day itinerary with optional stops and completion tracking.
-- OpenStreetMap / Leaflet map with city and category filters, search, favourites and Google Maps directions links.
-- Discovery cards for food, quiet neighbourhoods, shopping, photo stops and nightlife.
-- Onsen comparison with explicit warnings about private-bath eligibility and shared-bath vs private-room distinctions.
-- Yen expense tracker with editable INR planning conversion.
-- Packing / booking checklist and Japanese phrase cards with browser speech synthesis.
-- Local storage persistence, dark mode and basic service-worker caching.
+- Current December 4–14 itinerary; the old November draft is inspiration only and does not replace the current dates.
+- Day cards, stop check-offs, day status and city filters.
+- Leaflet + OpenStreetMap pins, category filters, search, favourites, directions and saved place list. Tile maps need internet; pin coordinates are approximate.
+- Mood-led discoveries and low-energy / rainy-day / hidden-Fuji / slow-local-day fallback plans.
+- Onsen shortlist, with explicit private-bath vs shared-bath / private-rest-room caveats. Prices are planning estimates, not verified live quotes or booking offers.
+- Open-Meteo current weather and forecast where the provider's forecast horizon supports it. Forecasts for December 4–14 will only become available as those dates enter the forecast window. Fuji cloud cover is not a mountain webcam or a visibility guarantee.
+- Booking status board with official links. It is a manual tracker: it does not purchase tickets, reserve seats, check availability or confirm email/QR codes.
+- Transport launchpad linking live route services and operator timetables. There is no universal train API integration, live platform feed or disruption feed embedded in this static app.
+- Yen expense log with editable INR planning rate.
+- Pre-trip checklist, categorized packing list and Japanese phrases with speech playback where browser support exists.
+- Local document/confirmation index (links and reference labels only; do not store sensitive identity/payment data).
+- Memory journal with compressed photos, dates, locations and notes.
+- JSON backup/export and restore for local app data; print/save guide.
+- Dark mode, mobile layout, service-worker shell caching and browser-local persistence.
 
-## Important notes
+## Data, privacy and limitations
 
-- The itinerary uses the current December 4–14 plan. The older `J_4.0` PDF contained a different November 27–December 7 draft, so it was treated as inspiration rather than the current schedule.
-- Map pins are approximate coordinates. Use the linked directions and confirm the precise entrance before travelling.
-- Map tiles require internet. The app shell can be cached, but it is not a complete offline map.
-- Opening hours, prices, club events, transport schedules, onsen access rules and reservation availability can change. The onsen prices shown are research-note estimates, not guaranteed live quotes. Confirm directly with the venue before booking or travelling.
-- No live ticket inventory, train API, weather feed or booking checkout is connected. The app is a planner, not a booking agent.
-- All personal progress, favourites, checklist ticks and spending entries are stored in the browser's local storage on that device. Clearing browser data will clear them.
+- Checklist, completed stops, favourites, spending, booking statuses, document index, packing ticks, and journal entries are stored in browser localStorage on that device. Export a JSON backup to move state between browsers/devices. Clearing browser data can erase it.
+- Photos are resized and stored locally in browser storage. Add only a few per entry; large photo collections can hit browser quota. Keep the originals in your normal photo library / cloud backup.
+- The app does not upload journal data to a server. Anyone with access to the same browser profile may see local entries.
+- OpenStreetMap map tiles, weather feed, external directions and provider pages require internet. The service worker caches the app shell only; it is not a complete offline map or live itinerary sync.
+- Weather is sourced from Open-Meteo and is only useful inside its forecast horizon. Recheck 1–3 days before each outdoor plan.
+- Train departure / delay / platform information is not directly integrated. Use the linked official operator services / NAVITIME / Google Maps and station announcements.
+- Booking links are provided for convenience. No inventory, pricing or checkout is connected. Booking status is user-entered.
+- Onsen rates and eligibility are research-note estimates. Confirm exact prices, mixed-gender/family restrictions, guest-only rules, tattoo policy, time slots and reservations directly with each venue.
+- This is a personal planning tool, not an emergency service or official travel provider. Confirm current rules, operating hours, transport, ticket details and contact numbers with official sources.
 
-## Data provenance
+## Content provenance
 
-The saved-place selection and inspiration came from the uploaded `JAPAN!!! - Google Maps.pdf` and `J_4.0.pdf`, reconciled against the current itinerary notes for 4–14 December 2026. Extra descriptions and local tips are planning suggestions and should be checked against current venue information.
+The itinerary and saved-place selection were reconciled from the current Japan trip notes, `JAPAN!!! - Google Maps.pdf`, and `J_4.0.pdf`. `J_4.0.pdf` had a separate November draft; it was not used to overwrite the current December 4–14 dates. Added suggestions are clearly travel-planning ideas, not guaranteed bookings or venue endorsements.
